@@ -1,0 +1,35 @@
+#+Title: Holochain package management
+#+Author: Gavin Rogers
+#+Email: gavinrogers@pm.me
+#+OPTIONS: toc:nil reveal_mathjax:t
+#+REVEAL_THEME: night
+#+REVEAL_TRANS: linear    
+#+REVEAL_ROOT: http://cdn.jsdelivr.net/reveal.js/3.0.0/
+
+
+* The Problem
+** As app builders, developers need tools and packages
+In order to quickly bootstrap an eosystem of *quality* software, it will be necessary to build on top of excellent libraries
+  - Cryptography: [[https://git.universe-factory.net/libuecc][libuecc]], [[https://www.pycryptodome.org/][pycryptodome]], [[https://go.googlesource.com/crypto][go-crypto]], [[https://github.com/libp2p/go-libp2p-crypto][libp2p-crypto]], [[http://cryptopp.com/][Crypto++]], [[http://doc.libsodium.org/][libsodium]], [[http://files.randombit.net/botan/][botan]], [[http://www.bouncycastle.org][Bouncy Castle]], [[http://cryptlib.com/][cryptlib]], [[https://www.gnu.org/software/libgcrypt/][libgcrypt]], softhsm, pycrypt, bcryp, scrypt, sops, tcpcrypt, perl-Crypt, perl-Math, perl-CryptX, olm, gnuradio-nacl, libmcrypt, nettle, ccrypt, cryptol, 
+  - Data manipulation
+  - API libraries: 
+  - Dependancy management can be a nightmare
+  - 
+* [#B] Existing package management
+  - npm [[https://npm.github.io/how-npm-works-docs/npm3/non-determinism.html][not designed to be deterministic]]
+  - gx-go
+  - CPAN
+  - dpkg
+  - rpm
+The problem with these tools is they can't guarantee the contents of a zome because they are not deterministic
+
+** Existing configuration management
+  - puppet
+  - chef
+* Functional Solutions
+** Determinism
+What do we mean by a deterministic package manager? "Determinism is the philosophical theory that all events, including moral choices, are completely determined by previously existing causes."
+
+  - yarn [[https://yarnpkg.com/blog/2017/05/31/determinism/][Yarn Determinism]]
+  - npm (after version 5.0) 
+* Implimentation

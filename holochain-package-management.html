@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Holochain package management</title>
+<meta name="author" content="(Gavin Rogers)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/reveal.css"/>
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/theme/night.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://cdn.jsdelivr.net/reveal.js/3.0.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Holochain package management</h1><h2 class="author">Gavin Rogers</h2><p class="date">Created: 2018-05-16 Wed 16:40</p>
+</section>
+
+
+<section>
+<section id="slide-org9597770">
+<h2 id="org9597770"><span class="section-number-2">1</span> The Problem</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+</section>
+<section id="slide-org4b3b85b">
+<h3 id="org4b3b85b"><span class="section-number-3">1.1</span> As app builders, developers need tools and packages</h3>
+<p>
+In order to quickly bootstrap an eosystem of <b>quality</b> software, it will be necessary to build on top of excellent libraries
+</p>
+<ul>
+<li>Cryptography: <a href="https://git.universe-factory.net/libuecc">libuecc</a>, <a href="https://www.pycryptodome.org/">pycryptodome</a>, <a href="https://go.googlesource.com/crypto">go-crypto</a>, <a href="https://github.com/libp2p/go-libp2p-crypto">libp2p-crypto</a>, <a href="http://cryptopp.com/">Crypto++</a>, <a href="http://doc.libsodium.org/">libsodium</a>, <a href="http://files.randombit.net/botan/">botan</a>, <a href="http://www.bouncycastle.org">Bouncy Castle</a>, <a href="http://cryptlib.com/">cryptlib</a>, <a href="https://www.gnu.org/software/libgcrypt/">libgcrypt</a>, softhsm, pycrypt, bcryp, scrypt, sops, tcpcrypt, perl-Crypt, perl-Math, perl-CryptX, olm, gnuradio-nacl, libmcrypt, nettle, ccrypt, cryptol,</li>
+<li>Data manipulation</li>
+<li>API libraries:</li>
+<li>Dependancy management can be a nightmare</li>
+<li></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org2ad9d0e">
+<h2 id="org2ad9d0e"><span class="section-number-2">2</span> Existing package management</h2>
+<ul>
+<li>npm <a href="https://npm.github.io/how-npm-works-docs/npm3/non-determinism.html">not designed to be deterministic</a></li>
+<li>gx-go</li>
+<li>CPAN</li>
+<li>dpkg</li>
+<li>rpm</li>
+
+</ul>
+<p>
+The problem with these tools is they can't guarantee the contents of a zome because they are not deterministic
+</p>
+
+</section>
+<section id="slide-org72b9e66">
+<h3 id="org72b9e66"><span class="section-number-3">2.1</span> Existing configuration management</h3>
+<ul>
+<li>puppet</li>
+<li>chef</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orga29618e">
+<h2 id="orga29618e"><span class="section-number-2">3</span> Functional Solutions</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+</section>
+<section id="slide-orgea51b44">
+<h3 id="orgea51b44"><span class="section-number-3">3.1</span> Determinism</h3>
+<p>
+What do we mean by a deterministic package manager? "Determinism is the philosophical theory that all events, including moral choices, are completely determined by previously existing causes."
+</p>
+
+<ul>
+<li>yarn <a href="https://yarnpkg.com/blog/2017/05/31/determinism/">Yarn Determinism</a></li>
+<li>npm (after version 5.0)</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org099b3ae">
+<h2 id="org099b3ae"><span class="section-number-2">4</span> Implimentation</h2>
+</section>
+</section>
+</div>
+</div>
+<script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/head.min.js"></script>
+<script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>
