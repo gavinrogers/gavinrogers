@@ -32,8 +32,7 @@ NixOS is an operating system which is built entirely from the nix expressions fo
   - rpm
   - pip
   - Ruby gems, rvm, rbenv etc
-
-The problem with these tools is they can't guarantee the contents of a zome because they are not deterministic
+The problem with these tools is they can't guarantee the contents of a zome because they are not deterministic: the order in which things are declared, for instance, can create a difference in the outputs of these package managers.
 ** Non-functional configuration management
   - puppet
   - chef

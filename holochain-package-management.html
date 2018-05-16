@@ -26,18 +26,18 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h1 class="title">Holochain package management</h1><h2 class="author">Gavin Rogers</h2><p class="date">Created: 2018-05-16 Wed 19:37</p>
+<section id="sec-title-slide"><h1 class="title">Holochain package management</h1><h2 class="author">Gavin Rogers</h2><p class="date">Created: 2018-05-16 Wed 22:35</p>
 </section>
 
 
 <section>
-<section id="slide-org3da07c1">
-<h2 id="org3da07c1"><span class="section-number-2">1</span> The Problem</h2>
+<section id="slide-orga0d48cd">
+<h2 id="orga0d48cd"><span class="section-number-2">1</span> The Problem</h2>
 <div class="outline-text-2" id="text-1">
 </div>
 </section>
-<section id="slide-org6103fe8">
-<h3 id="org6103fe8"><span class="section-number-3">1.1</span> As app builders, developers need tools and packages</h3>
+<section id="slide-orgf2e3b8f">
+<h3 id="orgf2e3b8f"><span class="section-number-3">1.1</span> As app builders, developers need tools and packages</h3>
 <p>
 In order to quickly bootstrap an eosystem of <b>quality</b> software, it will be necessary to build on top of excellent libraries
 </p>
@@ -54,38 +54,71 @@ Currently, we are building a software ecosystem from runtime environments implim
 </section>
 </section>
 <section>
-<section id="slide-orgaed50ef">
-<h2 id="orgaed50ef"><span class="section-number-2">2</span> Existing package management</h2>
+<section id="slide-org91a97bc">
+<h2 id="org91a97bc"><span class="section-number-2">2</span> What is nix?</h2>
+<p>
+Nix is a powerful package manager for Linux and other Unix systems that makes package management reliable and reproducible. It provides atomic upgrades and rollbacks, side-by-side installation of multiple versions of a package, multi-user package management and easy setup of build environments. It is a purely functional language.
+</p>
+</section>
+<section id="slide-org5ed8c2b">
+<h3 id="org5ed8c2b"><span class="section-number-3">2.1</span> Nixpkgs</h3>
+<p>
+Nixpkgs is a huge collection of nix expressions, giving developers access to just about every library in every language. 
+</p>
+</section>
+<section id="slide-org6802e86">
+<h3 id="org6802e86"><span class="section-number-3">2.2</span> NixOps</h3>
+<p>
+A tool for provisioning network and compute resources declaratively using the functional nix language. Current VM support includes nix-shell, NixOS containers, Amazon containers, Goolge Cloud Compute and exporting to Dockerfile. If we defined Holochain DNA using nix expressions and added holochain as a NixOps target, it would be easy to create apps which could deploy across all these platforms seamlessly.
+</p>
+</section>
+<section id="slide-orgce7a672">
+<h3 id="orgce7a672"><span class="section-number-3">2.3</span> Nixos</h3>
+<p>
+NixOS is an operating system which is built entirely from the nix expressions found in nixpkgs.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org5df6985">
+<h2 id="org5df6985"><span class="section-number-2">3</span> Functional vs non-functional</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+</section>
+<section id="slide-orgc4860e2">
+<h3 id="orgc4860e2"><span class="section-number-3">3.1</span> Non-functional package management</h3>
 <ul>
 <li>npm <a href="https://npm.github.io/how-npm-works-docs/npm3/non-determinism.html">not designed to be deterministic</a></li>
 <li>gx-go</li>
 <li>CPAN</li>
 <li>dpkg</li>
 <li>rpm</li>
+<li>pip</li>
+<li>Ruby gems, rvm, rbenv etc</li>
 
 </ul>
 <p>
-The problem with these tools is they can't guarantee the contents of a zome because they are not deterministic
+The problem with these tools is they can't guarantee the contents of a zome because they are not deterministic: the order in which things are declared, for instance, can create a difference in the outputs of these package managers.
 </p>
-
 </section>
-<section id="slide-orgeb55a15">
-<h3 id="orgeb55a15"><span class="section-number-3">2.1</span> Existing configuration management</h3>
+<section id="slide-org2d2a96a">
+<h3 id="org2d2a96a"><span class="section-number-3">3.2</span> Non-functional configuration management</h3>
 <ul>
 <li>puppet</li>
 <li>chef</li>
 
 </ul>
 </section>
+<section id="slide-org77ff849">
+<h3 id="org77ff849"><span class="section-number-3">3.3</span> Functional package management</h3>
+<p>
+Each nix expression 
+</p>
+</section>
 </section>
 <section>
-<section id="slide-orgf75a7b5">
-<h2 id="orgf75a7b5"><span class="section-number-2">3</span> Functional Solutions</h2>
-<div class="outline-text-2" id="text-3">
-</div>
-</section>
-<section id="slide-orgdf0500f">
-<h3 id="orgdf0500f"><span class="section-number-3">3.1</span> Determinism</h3>
+<section id="slide-org6e55915">
+<h2 id="org6e55915"><span class="section-number-2">4</span> Deterministic vs non-deterministic</h2>
 <p>
 What do we mean by a deterministic package manager? "Determinism is the philosophical theory that all events, including moral choices, are completely determined by previously existing causes."
 </p>
@@ -93,13 +126,34 @@ What do we mean by a deterministic package manager? "Determinism is the philosop
 <ul>
 <li>yarn <a href="https://yarnpkg.com/blog/2017/05/31/determinism/">Yarn Determinism</a></li>
 <li>npm (after version 5.0)</li>
+<li>nixpkgs (actually does determinism correctly)</li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-orge0fce8f">
-<h2 id="orge0fce8f"><span class="section-number-2">4</span> Implimentation</h2>
+<section id="slide-orgd87dffb">
+<h2 id="orgd87dffb"><span class="section-number-2">5</span> Functional Solutions</h2>
+<p>
+Nix (and it's FSF offshoot, Guix) is the only purely functional solution in this space
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org6b80cc5">
+<h2 id="org6b80cc5"><span class="section-number-2">6</span> Implimentation</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+</section>
+<section id="slide-orgd3fbf8b">
+<h3 id="orgd3fbf8b"><span class="section-number-3">6.1</span> Starting from the DNA</h3>
+<p>
+Currently we are defining the functions of a zome using a JSON/YAML file which the points to javascript functions.
+</p>
+<ul>
+<li>Write the actual functions in nix: ```</li>
+
+</ul>
 </section>
 </section>
 </div>
