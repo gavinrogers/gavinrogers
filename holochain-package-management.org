@@ -8,12 +8,22 @@
 
 
 * The Problem
-** As app builders, developers need tools and packages
+As app builders, developers need tools and packages. Software architecture has always been plagued by inconsitency, dependency conflicts, and build time errors.
+
+Devops engineers learned years ago that idempotency (re-running the build and deployment multiple times results in the same output) and determinism were keys to acheiving success.
+
+The core of Holochain has an essential improvement of a DHT, and this can be only realized through distinctive functions which define the DNA of a given app. It is essential that these functions be verifiably identical on different nodes which are running the same DNA.
+
+In order for the fuctions to be verifiably identical, the package management must be verifiably identical as well.
+** The opportunity of software libraries
 In order to quickly bootstrap an eosystem of *quality* software, it will be necessary to build on top of excellent libraries
   - Cryptography: [[https://git.universe-factory.net/libuecc][libuecc]], [[https://www.pycryptodome.org/][pycryptodome]], [[https://go.googlesource.com/crypto][go-crypto]], [[https://github.com/libp2p/go-libp2p-crypto][libp2p-crypto]], [[http://cryptopp.com/][Crypto++]], [[http://doc.libsodium.org/][libsodium]], [[http://files.randombit.net/botan/][botan]], [[http://www.bouncycastle.org][Bouncy Castle]], [[http://cryptlib.com/][cryptlib]], [[https://www.gnu.org/software/libgcrypt/][libgcrypt]], softhsm, pycrypt, bcryp, scrypt, sops, tcpcrypt, perl-Crypt, perl-Math, perl-CryptX, olm, gnuradio-nacl, libmcrypt, nettle, ccrypt, cryptol, 
   - Data manipulation: 
   - API libraries: 
   - Dependancy management can be a nightmare
+** The opportunity of verifiably identical software environments
+Nix makes sure that each software environment can be custom tailored to the app, while re-using all the supporting libraries which are shared with other apps on the system. The libraries are stored as derivations in the nix store
+** The limitation of using only runtime interpreters
 Currently, we are building a software ecosystem from runtime environments implimented in Go (Otto and 
 * What is nix?
 Nix is a powerful package manager for Linux and other Unix systems that makes package management reliable and reproducible. It provides atomic upgrades and rollbacks, side-by-side installation of multiple versions of a package, multi-user package management and easy setup of build environments. It is a purely functional language.
@@ -32,8 +42,7 @@ NixOS is an operating system which is built entirely from the nix expressions fo
   - rpm
   - pip
   - Ruby gems, rvm, rbenv etc
-
-The problem with these tools is they can't guarantee the contents of a zome because they are not deterministic
+The problem with these tools is they can't guarantee the contents of a zome because they are not deterministic: the order in which things are declared, for instance, can create a difference in the outputs of these package managers.
 ** Non-functional configuration management
   - puppet
   - chef
