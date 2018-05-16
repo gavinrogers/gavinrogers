@@ -11,25 +11,44 @@
 ** As app builders, developers need tools and packages
 In order to quickly bootstrap an eosystem of *quality* software, it will be necessary to build on top of excellent libraries
   - Cryptography: [[https://git.universe-factory.net/libuecc][libuecc]], [[https://www.pycryptodome.org/][pycryptodome]], [[https://go.googlesource.com/crypto][go-crypto]], [[https://github.com/libp2p/go-libp2p-crypto][libp2p-crypto]], [[http://cryptopp.com/][Crypto++]], [[http://doc.libsodium.org/][libsodium]], [[http://files.randombit.net/botan/][botan]], [[http://www.bouncycastle.org][Bouncy Castle]], [[http://cryptlib.com/][cryptlib]], [[https://www.gnu.org/software/libgcrypt/][libgcrypt]], softhsm, pycrypt, bcryp, scrypt, sops, tcpcrypt, perl-Crypt, perl-Math, perl-CryptX, olm, gnuradio-nacl, libmcrypt, nettle, ccrypt, cryptol, 
-  - Data manipulation
+  - Data manipulation: 
   - API libraries: 
   - Dependancy management can be a nightmare
-  - 
-* [#B] Existing package management
+Currently, we are building a software ecosystem from runtime environments implimented in Go (Otto and 
+* What is nix?
+Nix is a powerful package manager for Linux and other Unix systems that makes package management reliable and reproducible. It provides atomic upgrades and rollbacks, side-by-side installation of multiple versions of a package, multi-user package management and easy setup of build environments. It is a purely functional language.
+** Nixpkgs
+Nixpkgs is a huge collection of nix expressions, giving developers access to just about every library in every language. 
+** NixOps
+A tool for provisioning network and compute resources declaratively using the functional nix language. Current VM support includes nix-shell, NixOS containers, Amazon containers, Goolge Cloud Compute and exporting to Dockerfile. If we defined Holochain DNA using nix expressions and added holochain as a NixOps target, it would be easy to create apps which could deploy across all these platforms seamlessly.
+** Nixos
+NixOS is an operating system which is built entirely from the nix expressions found in nixpkgs.
+* [#B] Functional vs non-functional
+** Non-functional package management
   - npm [[https://npm.github.io/how-npm-works-docs/npm3/non-determinism.html][not designed to be deterministic]]
   - gx-go
   - CPAN
   - dpkg
   - rpm
-The problem with these tools is they can't guarantee the contents of a zome because they are not deterministic
+  - pip
+  - Ruby gems, rvm, rbenv etc
 
-** Existing configuration management
+The problem with these tools is they can't guarantee the contents of a zome because they are not deterministic
+** Non-functional configuration management
   - puppet
   - chef
-* Functional Solutions
-** Determinism
+** Functional package management
+Each nix expression 
+* Deterministic vs non-deterministic
 What do we mean by a deterministic package manager? "Determinism is the philosophical theory that all events, including moral choices, are completely determined by previously existing causes."
 
   - yarn [[https://yarnpkg.com/blog/2017/05/31/determinism/][Yarn Determinism]]
-  - npm (after version 5.0) 
+  - npm (after version 5.0)
+  - nixpkgs (actually does determinism correctly)
+* Functional Solutions
+Nix (and it's FSF offshoot, Guix) is the only purely functional solution in this space
 * Implimentation
+** Starting from the DNA
+Currently we are defining the functions of a zome using a JSON/YAML file which the points to javascript functions.
+  - Write the actual functions in nix: ```
+ 
