@@ -3,18 +3,31 @@
 #+Email: gavinrogers@pm.me
 #+OPTIONS: toc:nil reveal_mathjax:t
 #+REVEAL_THEME: night
+#+REVEAL_PLUGINS: (highlight)
 #+REVEAL_TRANS: linear    
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/reveal.js/3.0.0/
 
 
 * The Problem
-As app builders, developers need tools and packages. Software architecture has always been plagued by inconsitency, dependency conflicts, and build time errors.
+  + Code re-use is important
 
+  + Deterministic code re-use is hard: verifiably deterministic code re-use is harder
+
+  + Code must be verifiably deterministic for the DNA of dApps
+
+  + UX and DX (developer experience) are both critical for network effects
+** Code re-use is important
+As app builders, developers need tools and packages. Software architecture has always been plagued by inconsitency, dependency conflicts, and build time errors. 
+
+** Deterministic code re-use is hard
 Devops engineers learned years ago that idempotency (re-running the build and deployment multiple times results in the same output) and determinism were keys to acheiving success.
 
+** Verifiably deterministic code re-use is even harder
 The core of Holochain has an essential improvement of a DHT, and this can be only realized through distinctive functions which define the DNA of a given app. It is essential that these functions be verifiably identical on different nodes which are running the same DNA.
 
+** Code must be verifiably deterministic for the DNA of dApps
 In order for the fuctions to be verifiably identical, the package management must be verifiably identical as well.
+* Code Re-use
 ** The opportunity of software libraries
 In order to quickly bootstrap an eosystem of *quality* software, it will be necessary to build on top of excellent libraries
   - Cryptography: [[https://git.universe-factory.net/libuecc][libuecc]], [[https://www.pycryptodome.org/][pycryptodome]], [[https://go.googlesource.com/crypto][go-crypto]], [[https://github.com/libp2p/go-libp2p-crypto][libp2p-crypto]], [[http://cryptopp.com/][Crypto++]], [[http://doc.libsodium.org/][libsodium]], [[http://files.randombit.net/botan/][botan]], [[http://www.bouncycastle.org][Bouncy Castle]], [[http://cryptlib.com/][cryptlib]], [[https://www.gnu.org/software/libgcrypt/][libgcrypt]], softhsm, pycrypt, bcryp, scrypt, sops, tcpcrypt, perl-Crypt, perl-Math, perl-CryptX, olm, gnuradio-nacl, libmcrypt, nettle, ccrypt, cryptol, 
@@ -26,13 +39,32 @@ Nix makes sure that each software environment can be custom tailored to the app,
 ** The limitation of using only runtime interpreters
 Currently, we are building a software ecosystem from runtime environments implimented in Go (Otto and 
 * What is nix?
-Nix is a powerful package manager for Linux and other Unix systems that makes package management reliable and reproducible. It provides atomic upgrades and rollbacks, side-by-side installation of multiple versions of a package, multi-user package management and easy setup of build environments. It is a purely functional language.
+  Nix is a powerful package manager for Linux and other Unix systems that makes package management reliable and reproducible. It provides atomic upgrades and rollbacks, side-by-side installation of multiple versions of a package, multi-user package management and easy setup of build environments. It is a purely functional language. Here is an example nix expression:
+
+
+  #+BEGIN_SRC nix 
+{ stdenv, fetchurl, perl }:
+
+stdenv.mkDerivation {
+  name = "hello-2.1.1";
+  builder = ./builder.sh;
+  src = fetchurl {
+    url = ftp://ftp.nluug.nl/pub/gnu/hello/hello-2.1.1.tar.gz;
+    sha256 = "1md7jsfd8pa45z73bz1kszpp01yw6x5ljkjk2hx7wl800any6465";
+  };
+  inherit perl;
+}
+  
+  #+END_SRC
+
+
 ** Nixpkgs
-Nixpkgs is a huge collection of nix expressions, giving developers access to just about every library in every language. 
+   Nixpkgs is a huge collection of nix expressions, giving developers access to just about every library in every language.
+
 ** NixOps
 A tool for provisioning network and compute resources declaratively using the functional nix language. Current VM support includes nix-shell, NixOS containers, Amazon containers, Goolge Cloud Compute and exporting to Dockerfile. If we defined Holochain DNA using nix expressions and added holochain as a NixOps target, it would be easy to create apps which could deploy across all these platforms seamlessly.
 ** Nixos
-NixOS is an operating system which is built entirely from the nix expressions found in nixpkgs.
+   NixOS is an operating system which is built entirely from the nix expressions found in nixpkgs.
 * [#B] Functional vs non-functional
 ** Non-functional package management
   - npm [[https://npm.github.io/how-npm-works-docs/npm3/non-determinism.html][not designed to be deterministic]]
