@@ -7,9 +7,9 @@
 <style type="text/css">
 .underline { text-decoration: underline; }
 </style>
-<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/reveal.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/reveal.js/3.0.0/css/reveal.css"/>
 
-<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/theme/night.css" id="theme"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/reveal.js/3.0.0/css/theme/night.css" id="theme"/>
 
 
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
@@ -18,7 +18,7 @@
         var link = document.createElement( 'link' );
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = 'http://cdn.jsdelivr.net/reveal.js/3.0.0/css/print/pdf.css';
+        link.href = 'https://cdn.jsdelivr.net/reveal.js/3.0.0/css/print/pdf.css';
         document.getElementsByTagName( 'head' )[0].appendChild( link );
     }
 </script>
@@ -26,13 +26,13 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h1 class="title">Holochain package management</h1><h2 class="author">Gavin Rogers</h2><p class="date">Created: 2018-05-16 Wed 23:57</p>
+<section id="sec-title-slide"><h1 class="title">Holochain package management</h1><h2 class="author">Gavin Rogers</h2><p class="date">Created: 2018-05-17 Thu 10:44</p>
 </section>
 
 
 <section>
-<section id="slide-orgd43e803">
-<h2 id="orgd43e803"><span class="section-number-2">1</span> The Problem</h2>
+<section id="slide-org069a20a">
+<h2 id="org069a20a"><span class="section-number-2">1</span> The Problem</h2>
 <p>
 As app builders, developers need tools and packages. Software architecture has always been plagued by inconsitency, dependency conflicts, and build time errors.
 </p>
@@ -49,8 +49,8 @@ The core of Holochain has an essential improvement of a DHT, and this can be onl
 In order for the fuctions to be verifiably identical, the package management must be verifiably identical as well.
 </p>
 </section>
-<section id="slide-org53bc86c">
-<h3 id="org53bc86c"><span class="section-number-3">1.1</span> The opportunity of software libraries</h3>
+<section id="slide-org7e8924f">
+<h3 id="org7e8924f"><span class="section-number-3">1.1</span> The opportunity of software libraries</h3>
 <p>
 In order to quickly bootstrap an eosystem of <b>quality</b> software, it will be necessary to build on top of excellent libraries
 </p>
@@ -62,53 +62,53 @@ In order to quickly bootstrap an eosystem of <b>quality</b> software, it will be
 
 </ul>
 </section>
-<section id="slide-orgfc2b523">
-<h3 id="orgfc2b523"><span class="section-number-3">1.2</span> The opportunity of verifiably identical software environments</h3>
+<section id="slide-org3291793">
+<h3 id="org3291793"><span class="section-number-3">1.2</span> The opportunity of verifiably identical software environments</h3>
 <p>
 Nix makes sure that each software environment can be custom tailored to the app, while re-using all the supporting libraries which are shared with other apps on the system. The libraries are stored as derivations in the nix store
 </p>
 </section>
-<section id="slide-org5bd2fbc">
-<h3 id="org5bd2fbc"><span class="section-number-3">1.3</span> The limitation of using only runtime interpreters</h3>
+<section id="slide-org9893ccd">
+<h3 id="org9893ccd"><span class="section-number-3">1.3</span> The limitation of using only runtime interpreters</h3>
 <p>
 Currently, we are building a software ecosystem from runtime environments implimented in Go (Otto and 
 </p>
 </section>
 </section>
 <section>
-<section id="slide-orgabcc705">
-<h2 id="orgabcc705"><span class="section-number-2">2</span> What is nix?</h2>
+<section id="slide-org3756bf7">
+<h2 id="org3756bf7"><span class="section-number-2">2</span> What is nix?</h2>
 <p>
 Nix is a powerful package manager for Linux and other Unix systems that makes package management reliable and reproducible. It provides atomic upgrades and rollbacks, side-by-side installation of multiple versions of a package, multi-user package management and easy setup of build environments. It is a purely functional language.
 </p>
 </section>
-<section id="slide-orgb3259ff">
-<h3 id="orgb3259ff"><span class="section-number-3">2.1</span> Nixpkgs</h3>
+<section id="slide-orgb3c7b41">
+<h3 id="orgb3c7b41"><span class="section-number-3">2.1</span> Nixpkgs</h3>
 <p>
 Nixpkgs is a huge collection of nix expressions, giving developers access to just about every library in every language. 
 </p>
 </section>
-<section id="slide-org720e7db">
-<h3 id="org720e7db"><span class="section-number-3">2.2</span> NixOps</h3>
+<section id="slide-org2b6fe08">
+<h3 id="org2b6fe08"><span class="section-number-3">2.2</span> NixOps</h3>
 <p>
 A tool for provisioning network and compute resources declaratively using the functional nix language. Current VM support includes nix-shell, NixOS containers, Amazon containers, Goolge Cloud Compute and exporting to Dockerfile. If we defined Holochain DNA using nix expressions and added holochain as a NixOps target, it would be easy to create apps which could deploy across all these platforms seamlessly.
 </p>
 </section>
-<section id="slide-org9a51ee0">
-<h3 id="org9a51ee0"><span class="section-number-3">2.3</span> Nixos</h3>
+<section id="slide-org1833667">
+<h3 id="org1833667"><span class="section-number-3">2.3</span> Nixos</h3>
 <p>
 NixOS is an operating system which is built entirely from the nix expressions found in nixpkgs.
 </p>
 </section>
 </section>
 <section>
-<section id="slide-org36c774c">
-<h2 id="org36c774c"><span class="section-number-2">3</span> Functional vs non-functional</h2>
+<section id="slide-orgbafa32e">
+<h2 id="orgbafa32e"><span class="section-number-2">3</span> Functional vs non-functional</h2>
 <div class="outline-text-2" id="text-3">
 </div>
 </section>
-<section id="slide-org7297e5f">
-<h3 id="org7297e5f"><span class="section-number-3">3.1</span> Non-functional package management</h3>
+<section id="slide-org3e0d640">
+<h3 id="org3e0d640"><span class="section-number-3">3.1</span> Non-functional package management</h3>
 <ul>
 <li>npm <a href="https://npm.github.io/how-npm-works-docs/npm3/non-determinism.html">not designed to be deterministic</a></li>
 <li>gx-go</li>
@@ -123,24 +123,24 @@ NixOS is an operating system which is built entirely from the nix expressions fo
 The problem with these tools is they can't guarantee the contents of a zome because they are not deterministic: the order in which things are declared, for instance, can create a difference in the outputs of these package managers.
 </p>
 </section>
-<section id="slide-org0cec446">
-<h3 id="org0cec446"><span class="section-number-3">3.2</span> Non-functional configuration management</h3>
+<section id="slide-orge12f855">
+<h3 id="orge12f855"><span class="section-number-3">3.2</span> Non-functional configuration management</h3>
 <ul>
 <li>puppet</li>
 <li>chef</li>
 
 </ul>
 </section>
-<section id="slide-org6e23777">
-<h3 id="org6e23777"><span class="section-number-3">3.3</span> Functional package management</h3>
+<section id="slide-org027e992">
+<h3 id="org027e992"><span class="section-number-3">3.3</span> Functional package management</h3>
 <p>
 Each nix expression 
 </p>
 </section>
 </section>
 <section>
-<section id="slide-orgc399d36">
-<h2 id="orgc399d36"><span class="section-number-2">4</span> Deterministic vs non-deterministic</h2>
+<section id="slide-org3a33bae">
+<h2 id="org3a33bae"><span class="section-number-2">4</span> Deterministic vs non-deterministic</h2>
 <p>
 What do we mean by a deterministic package manager? "Determinism is the philosophical theory that all events, including moral choices, are completely determined by previously existing causes."
 </p>
@@ -154,21 +154,21 @@ What do we mean by a deterministic package manager? "Determinism is the philosop
 </section>
 </section>
 <section>
-<section id="slide-org31c47d3">
-<h2 id="org31c47d3"><span class="section-number-2">5</span> Functional Solutions</h2>
+<section id="slide-org33e305e">
+<h2 id="org33e305e"><span class="section-number-2">5</span> Functional Solutions</h2>
 <p>
 Nix (and it's FSF offshoot, Guix) is the only purely functional solution in this space
 </p>
 </section>
 </section>
 <section>
-<section id="slide-orgd55b09a">
-<h2 id="orgd55b09a"><span class="section-number-2">6</span> Implimentation</h2>
+<section id="slide-org332af4d">
+<h2 id="org332af4d"><span class="section-number-2">6</span> Implimentation</h2>
 <div class="outline-text-2" id="text-6">
 </div>
 </section>
-<section id="slide-orgdc50609">
-<h3 id="orgdc50609"><span class="section-number-3">6.1</span> Starting from the DNA</h3>
+<section id="slide-org4c12ddd">
+<h3 id="org4c12ddd"><span class="section-number-3">6.1</span> Starting from the DNA</h3>
 <p>
 Currently we are defining the functions of a zome using a JSON/YAML file which the points to javascript functions.
 </p>
@@ -180,8 +180,8 @@ Currently we are defining the functions of a zome using a JSON/YAML file which t
 </section>
 </div>
 </div>
-<script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/head.min.js"></script>
-<script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/js/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/head.min.js"></script>
+<script src="https://cdn.jsdelivr.net/reveal.js/3.0.0/js/reveal.js"></script>
 
 <script>
 // Full list of configuration options available here:
@@ -208,11 +208,11 @@ multiplex: {
 
 // Optional libraries used to extend on reveal.js
 dependencies: [
- { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
- { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
 });
 </script>
 </body>
